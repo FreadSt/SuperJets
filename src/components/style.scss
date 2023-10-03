@@ -1,0 +1,16 @@
+.sidebar-wrapper{
+  width: 20vw;
+  height: 100vh;
+  background: red;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .tab-box{
+    .tabs{
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
