@@ -16,7 +16,7 @@ export const Sidebar = () => {
     }
     const renderedTabs = () => MENU_TABS.map((tab, index) => {
         return(
-            <li>
+            <li key={index}>
                 <Link to={tab.path} key={index}>{tab.title}</Link>
             </li>
         )
