@@ -1,7 +1,7 @@
 .hangar-wrapper{
   width: 100%;
   height: 100vh;
-  background: aqua;
+  border: 2px solid black;
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -62,8 +62,8 @@
     .wrapper{
       width: 100%;
       height: 450px;
-      background: red;
       display: flex;
+      border: 1px solid black;
       justify-content: center;
       flex-direction: column;
       align-items: center;
@@ -84,6 +84,129 @@
         div{
           background: antiquewhite;
           margin: 10px;
+        }
+      }
+    }
+  }
+}
+.stacking-rewards{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 60px 20px 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 100%;
+  margin-right: 20px;
+  .title-box{
+    display: flex;
+    justify-content: space-between;
+    .description{
+      width: 60%;
+      h1{
+        text-transform: uppercase;
+        font-weight: normal;
+      }
+    }
+    .history-table{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+      border: 1px solid black;
+      width: 511px;
+      height: 190px;
+      h1{
+        font-size: 14px;
+      }
+      .MuiTable-root{
+        border: 1px solid grey;
+        .MuiTableHead-root{
+          .MuiTableRow-root{
+            .MuiTableCell-root{
+              padding: 5px;
+            }
+          }
+        }
+        .MuiTableBody-root{
+          .MuiTableRow-root{
+            .MuiTableCell-root{
+              padding: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .rewards-history{
+    h1{
+
+    }
+    .btns-component{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .btn{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 5px;
+        width: 32%;
+        .description{
+
+        }
+        .btns{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          button{
+            height: 48%;
+          }
+        }
+      }
+    }
+  }
+  .lower-tables{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    .xnl-status,.stacker-history{
+      border: 1px solid black;
+      width: 47%;
+    }
+    .xnl-status{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .btns-component{
+        display: flex;
+        flex-direction: column;
+        .btn{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          box-sizing: border-box;
+          .description{
+            h2{
+              margin:0;
+            }
+          }
+          button{
+            width: 150px;
+            height: 35px;
+          }
+        }
+      }
+      .xnl-stats{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+        div{
+          display: flex;
+          flex-direction: column;
         }
       }
     }

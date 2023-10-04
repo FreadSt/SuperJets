@@ -26,9 +26,14 @@ export const Sidebar = () => {
         <div className={'sidebar-wrapper'}>
             <button
                 onClick={handleLogin}
+                className={'metamask-btn'}
             >
                 <div>Metamask</div>
             </button>
+            <div className={'balance'}>
+                <span>0.25 ETH</span>
+                <span>500 XNL</span>
+            </div>
             <div className={'tab-box'}>
                 <h1>Menu</h1>
                 <ul className={'tabs'}>
@@ -37,6 +42,7 @@ export const Sidebar = () => {
             </div>
             <button
                 onClick={handleClickDiscord}
+                className={'discord-btn'}
             >
                 <div>Discord</div>
             </button>
