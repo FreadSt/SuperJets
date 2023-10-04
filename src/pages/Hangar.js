@@ -23,12 +23,12 @@ export const Hangar = () => {
     })
     const [getRanked, setGetRanked] = useState('');
     const [isLoading, setIsLoading] = useState(false)
+    const [jetCheck, setJetCheck] = useState(false)
 
     useEffect(() => {
         const delay = setTimeout(() => {
             setIsLoading(true);
         }, 2000);
-
         return () => clearTimeout(delay);
     }, []);
 
@@ -54,7 +54,7 @@ export const Hangar = () => {
                 deaths: "600",
                 total_points_lost: "200",
                 total_points_won: "600",
-                best_perfomance: "12"
+                best_perfomance: "12",
             }))
     },[])
 
@@ -97,7 +97,7 @@ export const Hangar = () => {
                             <Loader/>
                     }
                     <button className={'fly-now'}>
-                        <div>FLY NOW</div>
+                        <div>{"FLY NOW"}</div>
                     </button>
                     <h1>Overall ranking:{getRanked}</h1>
                     <div className={'plane-stats'}>
