@@ -1,8 +1,7 @@
-.mainpage-wrapper{
+.hangar-wrapper{
   width: 100%;
   height: 100vh;
   background: aqua;
-  margin-right: 20px;
   padding: 20px;
   box-sizing: border-box;
   display: flex;
@@ -13,7 +12,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
       .stats-container{
         div{
           display: flex;

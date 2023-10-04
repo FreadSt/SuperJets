@@ -3,7 +3,8 @@ import Dropdown from "react-dropdown";
 import 'react-dropdown/style.css';
 import {JETS_NAMES} from "../constants/mainpageConstants";
 
-export const MainPage = () => {
+export const Hangar = () => {
+
     const jetsNames = []
 
     JETS_NAMES.forEach((jet) => {
@@ -11,7 +12,7 @@ export const MainPage = () => {
     });
 
     return(
-        <div className={'mainpage-wrapper'}>
+        <div className={'hangar-wrapper'}>
             <div className={'interface-box'}>
                 <div className={'stats'}>
                     <Dropdown
