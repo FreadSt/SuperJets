@@ -44,10 +44,10 @@ export const Hangar = () => {
                 )
             )
             .catch(err => console.log(err))
-        fetch('http://localhost:3000')
+        fetch('http://localhost:3000/getranked')
             .then(() => setGetRanked('859'))
             .catch(err => console.log(err))
-        fetch('http://localhost:3000')
+        fetch('http://localhost:3000/actionhistory')
             .then(() => setActionHistory({
                 missions: "1235",
                 kills: "2000",

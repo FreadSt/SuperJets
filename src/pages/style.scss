@@ -89,7 +89,7 @@
     }
   }
 }
-.stacking-rewards{
+.stacking-rewards, .claims-rewards{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -111,7 +111,6 @@
     .history-table{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       padding: 20px;
       box-sizing: border-box;
       border: 1px solid black;
@@ -211,4 +210,13 @@
       }
     }
   }
+}
+.leaderboard-wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px 20px 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 100%;
+  margin-right: 20px;
 }

@@ -1,5 +1,5 @@
 import {MaterialTable} from "../components/Table";
-import { TableContainer, Paper } from '@mui/material';
+import { TableContainer } from '@mui/material';
 import {CLAIMS_HISTORY_COLUMNS, CLAIMS_HISTORY_HEADER, STAKER_DATA, STAKER_HEADER} from "../constants/rewardsConstants";
 import Buttons from "../components/rewardsComponents/RewardsButtons";
 import {Stacked} from "../components/rewardsComponents/XNLStatus";
