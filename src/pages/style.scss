@@ -220,3 +220,40 @@
   width: 100%;
   margin-right: 20px;
 }
+.missions-container{
+  display: flex;
+  padding: 20px 60px 20px 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 100%;
+  margin-right: 20px;
+  .jet-stats{
+    width: 40%;
+    .jet-image{
+      width: 261px;
+      height: 241px;
+      border: 1px solid black;
+      margin: 40px 0;
+    }
+    .action-list{
+      display: flex;
+      align-items: center;
+      .list{
+        display: flex;
+        flex-direction: column;
+      }
+      button{
+        height: 50px;
+      }
+    }
+    .plane-stats{
+      .stats-list{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  .missions-list{
+    margin-left: 20px;
+  }
+}
