@@ -19,23 +19,23 @@ export const Claims = () => {
     })
 
     useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-            const fetchData = async () => {
-                try {
-                    setData(CLAIMS_HISTORY_COLUMNS)
-                    setRewardsHistory(PAYTOEARN_DATA)
-                    setBalance({
-                        earned_rewards: "10 ETH",
-                        claimed_rewards: "0.5 ETH",
-                        claimable_rewards: "9.5 ETH",
-                    })
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            };
-            fetchData();
-        }, 2000);
+        // setTimeout(() => {
+        //     setIsLoading(false);
+        //     const fetchData = async () => {
+        //         try {
+        //             setData(CLAIMS_HISTORY_COLUMNS)
+        //             setRewardsHistory(PAYTOEARN_DATA)
+        //             setBalance({
+        //                 earned_rewards: "10 ETH",
+        //                 claimed_rewards: "0.5 ETH",
+        //                 claimable_rewards: "9.5 ETH",
+        //             })
+        //         } catch (error) {
+        //             console.error('Error fetching data:', error);
+        //         }
+        //     };
+        //     fetchData();
+        // }, 2000);
     }, []);
     const rewardsHeaders = PAYTOEARN_HEADER
     const headers = CLAIMS_HISTORY_HEADER;

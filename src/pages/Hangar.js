@@ -1,68 +1,126 @@
 import './style.scss';
 import Dropdown from "react-dropdown";
 import 'react-dropdown/style.css';
-import {JETS_NAMES} from "../constants/mainpageConstants";
-import {useState, useEffect} from "react";
-import Loader from "../components/Loader";
+import {useEffect, useState} from "react";
+import { setLoadJetsCallback } from "../utils/GlobalState";
+import { runTransaction } from "../utils/MetaMask";
+
+let jets = [];
+let jet_names = [];
+let currentJetId = 0;
 
 export const Hangar = () => {
-    const [stats, setStats] = useState({
+    const [jetsNames, setJetsNames] = useState([])
+    const [selectedJet, setJet] = useState({
+        id: 0,
+        model: "",
+        country: "",
+        decal: "",
+        block_id: 0,
         operator: "",
-        age:"",
-        attack:"",
-        defence:"",
-        damage:"",
-    });
-    const [actionHistory, setActionHistory] = useState({
-        missions:"",
-        kills:"",
-        deaths:"",
-        total_points_won:"",
-        total_points_lost:"",
-        best_perfomance:"",
+        attack: 0,
+        defense: 0,
+        damage: 0,
+        rank: 0,
+        missions: 0,
+        kills: 0,
+        deaths: 0,
+        total_points_won: 0,
+        total_points_lost: 0,
+        best_performance: 0,
+        is_trainer: false,
     })
-    const [getRanked, setGetRanked] = useState('');
-    const [isLoading, setIsLoading] = useState(false)
-    const [jetCheck, setJetCheck] = useState(false)
+    const [jetStats, setJetStats] = useState({
+        age: 0,
+        repair_time: 0,
+        state: "",
+    })
+
+    const mintSuperJet = async () => {
+        const tx = await (await fetch(`/jets/mint?trainer=0`, { credentials: "include" })).json();
+        const hash = await runTransaction(tx);
+        console.log("hash:", hash)
+    }
+
+    const mintTrainerJet = async () => {
+        const tx = await (await fetch(`/jets/mint?trainer=1`, { credentials: "include" })).json();
+        const hash = await runTransaction(tx);
+        console.log("hash:", hash)
+    }
+
+    const upgradeAttack = async () => {
+        const tx = await (await fetch(`/jets/upgrade/attack?jetId=${selectedJet.id}`, { credentials: "include" })).json();
+        const hash = await runTransaction(tx);
+        console.log("hash:", hash)
+        selectJet(jet_names[currentJetId]);
+    }
+
+    const upgradeDefense = async () => {
+        const tx = await (await fetch(`/jets/upgrade/defense?jetId=${selectedJet.id}`, { credentials: "include" })).json();
+        const hash = await runTransaction(tx);
+        console.log("hash:", hash)
+        selectJet(jet_names[currentJetId]);
+    }
+
+    const repair = async () => {
+        const tx = await (await fetch(`/jets/repair?jetId=${selectedJet.id}`, { credentials: "include" })).json();
+        const hash = await runTransaction(tx);
+        console.log("hash:", hash)
+        selectJet(jet_names[currentJetId]);
+    }
+
+    const flyNow = async () => {
+        console.log(jetStats.state, jetStats.age, selectedJet.damage)
+        if (jetStats.state === "in_hangar" && jetStats.age < 100 && selectedJet.damage < 100) {
+            console.log("flyNow:", selectedJet.id)
+            const req = await fetch(`/matchs/join?jetId=${selectedJet.id}`, {
+                method: 'POST',
+                credentials: "include"
+            });
+            console.log("req:", req)
+            const res = await req.text();
+            console.log("res:", res)
+
+            selectJet(jet_names[currentJetId]);
+        }
+    }
+
+    const loadJets = async () => {
+        try {
+            jets = await (await fetch(`/jets/list`, { credentials: "include" })).json();
+            jet_names = []
+
+            for (let jet of jets) {
+                const jet_name = jet.model + " " + jet.country + ", " + jet.decal + " #" + jet.block_id;
+                jet_names.push(jet_name)
+            }
+
+            if (jets.length === 0) {
+                return;
+            }
+            setJetsNames(jet_names)
+            selectJet(jet_names[0])
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const selectJet = (jet_name) => {
+        currentJetId = jet_names.indexOf(jet_name);
+        const jet = jets[currentJetId];
+        console.log(jet_name, currentJetId, jet)
+        setJet(jet);
+        if (jet) {
+            fetch(`/jets/stats?jetId=${jet.id}`, { credentials: "include" }).then(async (res) => {
+                const stats = await res.json();
+                setJetStats(stats);
+            });
+        }
+    }
 
     useEffect(() => {
-        const delay = setTimeout(() => {
-            setIsLoading(true);
-        }, 2000);
-        return () => clearTimeout(delay);
+        loadJets().then().catch();
     }, []);
-
-    useEffect(() => {
-        fetch('/localhost:3000/stats')
-            .then(() => setStats({
-                    operator:"Australian Air Force",
-                    age:"0",
-                    attack: "100 PTS",
-                    defence: "50 PTS",
-                    damage: "20 PTS"
-                    }
-                )
-            )
-            .catch(err => console.log(err))
-        fetch('http://localhost:3000/getranked')
-            .then(() => setGetRanked('859'))
-            .catch(err => console.log(err))
-        fetch('http://localhost:3000/actionhistory')
-            .then(() => setActionHistory({
-                missions: "1235",
-                kills: "2000",
-                deaths: "600",
-                total_points_lost: "200",
-                total_points_won: "600",
-                best_perfomance: "12",
-            }))
-    },[])
-
-    const jetsNames = []
-
-    JETS_NAMES.forEach((jet) => {
-        jetsNames.push(jet.name);
-    });
 
     return(
         <div className={'hangar-wrapper'}>
@@ -71,42 +129,57 @@ export const Hangar = () => {
                     <Dropdown
                         options={jetsNames}
                         placeholder={jetsNames[0]}
+                        onChange={(e) => {
+                            selectJet(e.value);
+                        }}
                     />
-                    <p>Operator:{stats.operator}</p>
+                    <p>Operator: {selectedJet.operator}</p>
                     {
-                        isLoading ?
                             <div className={'stats-container'}>
                                 <div className={'age'}>
-                                    <span>Age:{stats.age}</span>
-                                    <span>Minted at block</span>
+                                    <span>{ selectedJet.is_trainer ? "Trainer Jet" : "Super Jet" }</span>
+                                </div>
+                                <div className={'age'}>
+                                    <span>Age: {jetStats.age}</span>
+                                    <span>years</span>
+                                </div>
+                                <div className={'age'}>
+                                    <span>Repair time: {jetStats.repair_time}</span>
+                                    <span>seconds</span>
                                 </div>
                                 <div className={'attack'}>
-                                    <span>Attack: {stats.attack}</span>
-                                    <button>Boost</button>
+                                    <span>Attack: {selectedJet.attack}</span>
+                                    <button
+                                        onClick={upgradeAttack}
+                                    >Boost</button>
                                 </div>
                                 <div className={'defence'}>
-                                    <span>Defence: {stats.defence}</span>
-                                    <button>Boost</button>
+                                    <span>Defense: {selectedJet.defense}</span>
+                                    <button
+                                        onClick={upgradeDefense}
+                                    >Boost</button>
                                 </div>
                                 <div className={'damage'}>
-                                    <span>Damage: {stats.damage}</span>
-                                    <button>Repair</button>
+                                    <span>Damage: {selectedJet.damage}</span>
+                                    <button
+                                        onClick={repair}
+                                    >Repair</button>
                                 </div>
                             </div>
-                            :
-                            <Loader/>
                     }
-                    <button className={'fly-now'}>
-                        <div>{"FLY NOW"}</div>
+                    <button className={'fly-now'}
+                            onClick={flyNow}
+                    >
+                        <div>{jetStats.state === "in_repair" ? "Jet is under repair" : jetStats.state === "in_match_queue" ? "Jet in the match queue" : jetStats.state === "in_match_progress" ? "Jet on a match mission" : "FLY NOW" }</div>
                     </button>
-                    <h1>Overall ranking:{getRanked}</h1>
+                    <h1>Rank: {selectedJet.rank}</h1>
                     <div className={'plane-stats'}>
-                        <span>Missions:{actionHistory.missions}</span>
-                        <span>Kills:{actionHistory.kills}</span>
-                        <span>Deaths:{actionHistory.deaths}</span>
-                        <span>Total points won:{actionHistory.total_points_won}</span>
-                        <span>Total points lost:{actionHistory.total_points_lost}</span>
-                        <span>Best perfomance:{actionHistory.best_perfomance}</span>
+                        <span>Missions: {selectedJet.missions}</span>
+                        <span>Kills: {selectedJet.kills}</span>
+                        <span>Deaths: {selectedJet.deaths}</span>
+                        <span>Total points won: {selectedJet.total_points_won}</span>
+                        <span>Total points lost: {selectedJet.total_points_lost}</span>
+                        <span>Best perfomance: {selectedJet.best_performance}</span>
                     </div>
                 </div>
             </div>
@@ -116,8 +189,12 @@ export const Hangar = () => {
                         No plane? Mint now
                     </button>
                     <div className={'choices'}>
-                        <button>Mint Super Jet 0.05 ETH</button>
-                        <button>Mint Trainer Jet FREE</button>
+                        <button
+                            onClick={mintSuperJet}
+                        >Mint Super Jet 0.05 ETH</button>
+                        <button
+                            onClick={mintTrainerJet}
+                        >Mint Trainer Jet FREE</button>
                     </div>
                 </div>
             </div>

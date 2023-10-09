@@ -3,12 +3,30 @@ import { TableContainer } from '@mui/material';
 import {CLAIMS_HISTORY_COLUMNS, CLAIMS_HISTORY_HEADER, STAKER_DATA, STAKER_HEADER} from "../constants/rewardsConstants";
 import Buttons from "../components/rewardsComponents/RewardsButtons";
 import {Stacked} from "../components/rewardsComponents/XNLStatus";
+import {useEffect, useState} from "react";
 
 export const Rewards = () => {
     const headers = CLAIMS_HISTORY_HEADER;
     const data = CLAIMS_HISTORY_COLUMNS;
     const stackerHeader = STAKER_HEADER;
     const stackerData = STAKER_DATA;
+
+    const [xnlTotalStaked, setXnlTotalStaked] = useState(0);
+    const [xnlTotalStakers, setXnlTotalStakers] = useState(0);
+    const [xnlStaked, setXnlStaked] = useState(0);
+
+    const updateStacking = async () => {
+        const info = await (await fetch(`/staking/info`, { credentials: "include" })).json();
+        setXnlTotalStaked(info.total_staked);
+        setXnlTotalStakers(info.total_stakers);
+        setXnlStaked(info.staked);
+    }
+
+    useEffect(() => {
+        updateStacking().then();
+    }, []);
+
+
     return (
         <div className={'stacking-rewards'}>
             <div className={'title-box'}>
@@ -39,15 +57,15 @@ export const Rewards = () => {
                     <div className={'xnl-stats'}>
                         <div className={'total-staked'}>
                             <span>Total XNL Staked</span>
-                            <span>500,000</span>
+                            <span>{xnlTotalStaked}</span>
                         </div>
                         <div>
                             <span>Total stakers</span>
-                            <span>450</span>
+                            <span>{xnlTotalStakers}</span>
                         </div>
                         <div>
                             <span>You share</span>
-                            <span>1%</span>
+                            <span>{xnlStaked}</span>
                         </div>
                     </div>
                 </div>
