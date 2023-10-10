@@ -61,6 +61,7 @@ export const Rewards = () => {
                                 <MaterialTable headers={headers} data={claimsHistoryData}/>
                             </TableContainer>
                     }
+
                 </div>
             </div>
             <div className={'rewards-history'}>
