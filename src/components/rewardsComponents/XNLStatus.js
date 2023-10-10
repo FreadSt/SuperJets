@@ -1,27 +1,39 @@
 import React from 'react';
+import { runTransaction } from '../../utils/MetaMask';
+import { setUpdateStakingValue } from '../../utils/GlobalState';
 
 export const Stacked = () => {
     const data = [
         {
             title: "Staked XNL",
-            description: "5000",
+            description: "10",
             button: [
                 {
                     label: "Unstake XNL",
-                    action: () => {
-                        // Define the action for Button 1 here
+                    action: async () => {
+                        const tx = await (await fetch(`/staking/unstake?amount=${10}`, { credentials: "include" })).json();
+                        const hash = await runTransaction(tx);
+                        console.log("hashUnstake:", hash)
+                        await setUpdateStakingValue();
                     }
                 },
             ]
         },
         {
             title: "Unstaked XNL",
-            description: "500",
+            description: "10",
             button: [
                 {
                     label: "Stake XNL",
-                    action: () => {
-                        // Define the action for Button 1 here
+                    action: async () => {
+                        const txApprove = await (await fetch(`/xnl/approve?amount=${10}`, { credentials: "include" })).json();
+                        const hashApprove = await runTransaction(txApprove);
+                        console.log("hashApprove:", hashApprove)
+                        
+                        const tx = await (await fetch(`/staking/stake?amount=${10}`, { credentials: "include" })).json();
+                        const hash = await runTransaction(tx);
+                        console.log("hashStake:", hash)
+                        await setUpdateStakingValue();
                     }
                 },
             ]
