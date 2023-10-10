@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 import {CLAIMS_HISTORY_COLUMNS} from "../constants/rewardsConstants";
 import {PAYTOEARN_DATA} from "../constants/claimConstants";
 import Loader from "../components/Loader";
+import {MissionsList} from "../components/MIssionsList";
 export const Missions = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [ranking, setRanking] = useState('')
@@ -94,6 +95,7 @@ export const Missions = () => {
             </div>
             <div className={'missions-list'}>
                 <h1>Missions</h1>
+                <MissionsList/>
             </div>
         </div>
     )
