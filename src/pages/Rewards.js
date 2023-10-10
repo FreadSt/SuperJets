@@ -11,9 +11,9 @@ export const Rewards = () => {
     const [stakerData, setStakerData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [balance, setBalance] = useState({
-        earned_rewards:"",
-        claimed_rewards:"",
-        claimable_rewards:""
+        earned_rewards: "",
+        claimed_rewards: "",
+        claimable_rewards: "",
     })
     const headers = CLAIMS_HISTORY_HEADER;
     const data = CLAIMS_HISTORY_COLUMNS;
