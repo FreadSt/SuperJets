@@ -73,7 +73,7 @@ export const Hangar = () => {
         console.log(jetStats.state, jetStats.age, selectedJet.damage)
         if (jetStats.state === "in_hangar" && jetStats.age < 100 && selectedJet.damage < 100) {
             console.log("flyNow:", selectedJet.id)
-            const req = await fetch(`/matchs/join?jetId=${selectedJet.id}`, {
+            const req = await fetch(`/matches/join?jetId=${selectedJet.id}`, {
                 method: 'POST',
                 credentials: "include"
             });
