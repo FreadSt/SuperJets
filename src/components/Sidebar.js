@@ -31,7 +31,7 @@ export const Sidebar = () => {
     const renderedTabs = () => MENU_TABS.map((tab, index) => {
         return(
             <li key={index}>
-                <Link to={tab.path} key={index}>{tab.title}</Link>
+                <Link to={tab.path}>{tab.title}</Link>
             </li>
         )
     })
@@ -51,7 +51,7 @@ export const Sidebar = () => {
             <div className={'tab-box'}>
                 <h1>Menu</h1>
                 <ul className={'tabs'}>
-                    {renderedTabs}
+                    {renderedTabs()}
                 </ul>
             </div>
             <button
