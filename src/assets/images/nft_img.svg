@@ -1,0 +1,7 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.4">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M146 179H169L179 169V111L175 115V167L167 175H150L146 179Z" fill="#0086FB"/>
+<path d="M11 1L1 11V75L6 70V14L14 6H82L87 1H11Z" fill="#0086FB"/>
+<path d="M146 179H169L179 169V111M146 179H1V75M146 179L150 175H167L175 167V115L179 111M179 111V1H87M1 75V11L11 1H87M1 75L6 70V14L14 6H82L87 1" stroke="#0086FB" stroke-width="0.5"/>
+</g>
+</svg>

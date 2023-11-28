@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'QuanticoBoldItalic';
+    font-style: normal;
+    src: url('./Quantico-BoldItalic.ttf');
+    src: local('Quantico-BoldItalic'), url('./Quantico-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'QuanticoBold';
+    font-style: normal;
+    src: url('./Quantico-Bold.ttf');
+    src: local('Quantico-Bold'), url('./Quantico-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'QuanticoRegular';
+    font-style: normal;
+    src: url('./Quantico-Regular.ttf');
+    src: local('Quantico-Regular'), url('./Quantico-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'QuanticoItalic';
+    font-style: normal;
+    src: url('./Quantico-Italic.ttf');
+    src: local('Quantico-Italic'), url('./Quantico-Italic.ttf') format('truetype');
+}

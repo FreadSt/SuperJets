@@ -124,6 +124,29 @@ export const Hangar = () => {
 
     return(
         <div className={'hangar-wrapper'}>
+            <div className={'jet-box'}>
+                <div className={'wrapper'}>
+                    <div className={'nft-img'}></div>
+                   <div className={'mint-now'}>
+                       <span>No plane?</span>
+                       <p>mint one now</p>
+                   </div>
+                    <div className={'choices'}>
+                        <button onClick={mintSuperJet}>
+                            <div>
+                                <span>super jet</span>
+                                <p>0.05 eth</p>
+                            </div>
+                        </button>
+                        <button onClick={mintTrainerJet}>
+                            <div>
+                                <span>trainer</span>
+                                <p>free</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div className={'interface-box'}>
                 <div className={'stats'}>
                     <Dropdown
@@ -180,21 +203,6 @@ export const Hangar = () => {
                         <span>Total points won: {selectedJet.total_points_won}</span>
                         <span>Total points lost: {selectedJet.total_points_lost}</span>
                         <span>Best perfomance: {selectedJet.best_performance}</span>
-                    </div>
-                </div>
-            </div>
-            <div className={'jet-box'}>
-                <div className={'wrapper'}>
-                    <button className={'no-plane'}>
-                        No plane? Mint now
-                    </button>
-                    <div className={'choices'}>
-                        <button
-                            onClick={mintSuperJet}
-                        >Mint Super Jet 0.05 ETH</button>
-                        <button
-                            onClick={mintTrainerJet}
-                        >Mint Trainer Jet FREE</button>
                     </div>
                 </div>
             </div>

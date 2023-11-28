@@ -11,7 +11,8 @@ import {Rewards} from "./pages/Rewards";
 function App() {
   return (
       <div className={"App"}>
-          <Routes>
+        <Sidebar/>
+        <Routes>
               <Route path={'/hangar'} element={<Hangar/>}/>
               <Route path={'/missions'} element={<Missions/>}/>
               <Route path={'/marketplace'} element={<Marketplace/>}/>
@@ -19,7 +20,6 @@ function App() {
               <Route path={'/claims'} element={<Claims/>}/>
               <Route path={'/rewards'} element={<Rewards/>}/>
           </Routes>
-          <Sidebar/>
       </div>
   );
 }
