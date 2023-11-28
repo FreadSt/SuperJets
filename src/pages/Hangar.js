@@ -36,13 +36,13 @@ export const Hangar = () => {
     })
 
     const mintSuperJet = async () => {
-        const tx = await (await fetch(`/jets/mint?trainer=0`, { credentials: "include" })).json();
+        const tx = await (await fetch(`/jets/mint?is_trainer=0`, { credentials: "include" })).json();
         const hash = await runTransaction(tx);
         console.log("hash:", hash)
     }
 
     const mintTrainerJet = async () => {
-        const tx = await (await fetch(`/jets/mint?trainer=1`, { credentials: "include" })).json();
+        const tx = await (await fetch(`/jets/mint?is_trainer=1`, { credentials: "include" })).json();
         const hash = await runTransaction(tx);
         console.log("hash:", hash)
     }
@@ -221,7 +221,7 @@ export const Hangar = () => {
                     <button className={'fly-now'}
                             onClick={joinTournament}
                     >
-                        <div>{jetStats.state === "in_repair" ? "Jet is under repair" : jetStats.state === "in_match_queue" ? "Jet in the match queue" : jetStats.state === "in_match_progress" ? "Jet on a match mission" : paidTournament ? "Join to tournament" : "Pay tournament" }</div>
+                        <div>{ selectJet.is_trainer ? "Training jet didn't join the tournament" : jetStats.state === "in_repair" ? "Jet is under repair" : jetStats.state === "in_match_queue" ? "Jet in the match queue" : jetStats.state === "in_match_progress" ? "Jet on a match mission" : paidTournament ? "Join to tournament" : "Pay tournament" }</div>
                     </button>
                     <button className={'fly-now'}
                             onClick={flyNow}
