@@ -68,6 +68,7 @@ export const Sidebar = () => {
             {/*    <span>{xnlBalance} XNL</span>*/}
             {/*</div>*/}
             <div className={'tab-box'}>
+                <h1>Menu</h1>
                 <ul className={'tabs'}>
                     {renderedTabs()}
                 </ul>
